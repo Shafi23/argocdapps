@@ -1,20 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-demo
-  namespace: default
-spec:
+  name: whoami-deployment
+  labels:
+    app: whoami-demo
+    spec:
   replicas: 2
   selector:
     matchLabels:
-      app: nginx-demo
-  template:
-    metadata:
-      labels:
-        app: nginx-demo
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:latest
-        ports:
-        - containerPort: 80
+      app: whoami-demo
+      template:
+        metadata:
+          labels:
+            app: whoami-demo
+        spec:
+          containers:
+          - name: whoami-demo
+            image: traefik/whoami
+            ports:
+            - containerPort: 80
